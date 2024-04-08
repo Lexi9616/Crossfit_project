@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Workout detail {{ workout.get_type_display }}{% endblock %}
+
+{% block content %}
+    <p>{{ workout.get_type_display }}</p>
+    <p>{{ workout.description }}</p>
+    <p>{{ workout.date }}</p>
+{% endblock %}
+

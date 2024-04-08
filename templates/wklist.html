@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Workout List</h1>
+    <ul>
+        {% for workout in workouts %}
+            <li>{{ workout.get_type_display }} - {{ workout.date }}</li>
+        {% empty %}
+            <li>No workouts available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
