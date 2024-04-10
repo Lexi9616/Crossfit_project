@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
-from crossfit.forms import UserForm
+from crossfit.forms import UserForm, ProfileForm
 from crossfit.models import Workout, Profile
 
 
@@ -34,3 +34,10 @@ class UserCreateView(CreateView):
             new_user.save()
 
             return redirect('login')
+
+
+class ProfileUpdateView(UpdateView):
+    model = Profile
+    template_name = 'profileupdate.html'
+    form_class = ProfileForm
+    success_url = 'profile/'

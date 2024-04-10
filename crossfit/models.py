@@ -3,10 +3,10 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Profile(AbstractUser):
-    gender = models.CharField(max_length=20),
-    age = models.IntegerField(),
-    height = models.IntegerField(),
-    weight = models.FloatField(),
+    gender = models.CharField(max_length=20)
+    age = models.IntegerField()
+    height = models.IntegerField()
+    weight = models.FloatField()
     # profile_pic = models.ImageField()
 
     def __str__(self):

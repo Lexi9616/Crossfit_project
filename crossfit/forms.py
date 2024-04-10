@@ -8,8 +8,10 @@ from crossfit.models import Profile
 class UserForm(UserCreationForm):
     class Meta:
         model = Profile
-        fields = ['username', 'password1', 'password2', 'email']
+        fields = ['first_name', 'last_name', 'username', 'password1', 'password2', 'email']
         widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
             'password2': forms.PasswordInput(attrs={'class': 'form-control'}),
@@ -70,3 +72,22 @@ class PasswordSetForm(SetPasswordForm):
         super().__init__(*args, **kwargs)
         self.fields['new_password1'].widget.attrs.update({'class': 'form-control'})
         self.fields['new_password2'].widget.attrs.update({'class': 'form-control'})
+
+
+class ProfileForm(forms.ModelForm):
+    class ProfileForm(forms.ModelForm):
+        GENDER_CHOICES = (
+            ('male', 'Male'),
+            ('female', 'Female'))
+
+        gender = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.Select(attrs={'class': 'form-select'}))
+
+    class Meta:
+        model = Profile
+        fields = ['gender', 'age', 'height', 'weight']
+        widgets = {
+            'age': forms.NumberInput(attrs={'class': 'form-control'}),
+            'height': forms.NumberInput(attrs={'class': 'form-control'}),
+            'weight': forms.NumberInput(attrs={'class': 'form-control'})
+            # 'image': forms.FileInput(attrs={'class': 'form-control'}),
+        }
