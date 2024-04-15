@@ -103,3 +103,5 @@ class SubmitWorkoutResponseView(LoginRequiredMixin, FormView):
         response.workout = workout
         response.save()
         return redirect('workout_detail', pk=workout_id)
+
+
