@@ -1,12 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 
 
 class Profile(AbstractUser):
     gender = models.CharField(max_length=20)
-    age = models.IntegerField()
-    height = models.IntegerField()
-    weight = models.FloatField()
+    age = models.IntegerField(default=0)
+    height = models.IntegerField(default=0)
+    weight = models.FloatField(default=0)
     # profile_pic = models.ImageField()
 
     def __str__(self):
@@ -32,4 +32,4 @@ class WorkoutResponse(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
     time_taken = models.TimeField(blank=True, null=True)
     rounds_completed = models.IntegerField(blank=True, null=True)
-    weight_used = models.FloatField()
+    weight_used = models.FloatField(blank=True, null=True)

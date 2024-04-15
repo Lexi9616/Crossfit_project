@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, Auth
     SetPasswordForm
 from django import forms
 
-from crossfit.models import Profile
+from crossfit.models import Profile, WorkoutResponse
 
 
 class UserForm(UserCreationForm):
@@ -75,12 +75,12 @@ class PasswordSetForm(SetPasswordForm):
 
 
 class ProfileForm(forms.ModelForm):
-    class ProfileForm(forms.ModelForm):
-        GENDER_CHOICES = (
-            ('male', 'Male'),
-            ('female', 'Female'))
+    GENDER_CHOICES = (
+        ('male', 'Male'),
+        ('female', 'Female'))
 
-        gender = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.Select(attrs={'class': 'form-select'}))
+    gender = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.Select(attrs={'class': 'form-select'}))
+
 
     class Meta:
         model = Profile
@@ -91,3 +91,15 @@ class ProfileForm(forms.ModelForm):
             'weight': forms.NumberInput(attrs={'class': 'form-control'})
             # 'image': forms.FileInput(attrs={'class': 'form-control'}),
         }
+
+
+class WorkoutResponseForm(forms.ModelForm):
+    class Meta:
+        model = WorkoutResponse
+        fields = ['time_taken', 'rounds_completed', 'weight_used']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['time_taken'].widget.attrs['class'] = 'form-control'
+        self.fields['rounds_completed'].widget.attrs['class'] = 'form-control'
+        self.fields['weight_used'].widget.attrs['class'] = 'form-control'

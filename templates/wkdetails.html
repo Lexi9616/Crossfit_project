@@ -3,8 +3,9 @@
 {% block title %}Workout detail {{ workout.get_type_display }}{% endblock %}
 
 {% block content %}
+    <h1>Workout Detail</h1>
     <p>{{ workout.get_type_display }}</p>
     <p>{{ workout.description }}</p>
     <p>{{ workout.date }}</p>
+    <a href="{% url 'submit_workout_response' workout_id=workout.id %}" class="btn btn-primary">Submit Workout Response</a>
 {% endblock %}
-
