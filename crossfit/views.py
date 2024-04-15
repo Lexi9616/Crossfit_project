@@ -105,3 +105,10 @@ class SubmitWorkoutResponseView(LoginRequiredMixin, FormView):
         return redirect('workout_detail', pk=workout_id)
 
 
+class Leaderboard(LoginRequiredMixin, TemplateView):
+    model = WorkoutResponse
+    context_object_name = 'leaderboard'
+    template_name = 'profileupdate.html'
+    def leaderboard(request):
+        workout_responses = WorkoutResponse.objects.all()
+        return render(request, 'leaderboard.html', {'workout_responses': workout_responses})

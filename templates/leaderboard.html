@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+</head>
+<body>
+    <h1>Leaderboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Workout Type</th>
+                <th>Time Taken</th>
+                <th>Rounds Completed</th>
+                <th>Weight Used</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in leaderboard_entries %}
+            <tr>
+                <td>{{ entry.workout_response.user.username }}</td>
+                <td>{{ entry.workout_response.workout.get_type_display }}</td>
+                <td>{{ entry.workout_response.time_taken }}</td>
+                <td>{{ entry.workout_response.rounds_completed }}</td>
+                <td>{{ entry.workout_response.weight_used }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

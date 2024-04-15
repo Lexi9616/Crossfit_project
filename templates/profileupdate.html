@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile update{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 col-12">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="Submit" class="btn btn-success form-control">Submit</button>
+{#            <a href="{% url 'profile-details' profile.pk %}" class="btn btn-primary">Submit</a>#}
+        </form>
+    </div>
+{% endblock %}

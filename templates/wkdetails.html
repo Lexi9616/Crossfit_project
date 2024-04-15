@@ -7,5 +7,5 @@
     <p>{{ workout.get_type_display }}</p>
     <p>{{ workout.description }}</p>
     <p>{{ workout.date }}</p>
-    <a href="{% url 'submit_workout_response' workout_id=workout.id %}" class="btn btn-primary">Submit Workout Response</a>
+    <a href="{% url 'submit_workout_response' workout_id=workout.id %}" class="btn btn-primary">Log your result</a>
 {% endblock %}

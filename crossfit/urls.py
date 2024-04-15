@@ -11,5 +11,6 @@ urlpatterns = [
     path('profile-details/<int:pk>/', ProfileDetailView.as_view(), name='profile-details'),
     path('profile-edit/<int:pk>', views.ProfileUpdateView.as_view(), name='profile-update'),
     path('workout/<int:workout_id>/submit/', SubmitWorkoutResponseView.as_view(), name='submit_workout_response'),
+    path('leaderboard/', views.Leaderboard.as_view(), name='leaderboard'),
 
 ]
