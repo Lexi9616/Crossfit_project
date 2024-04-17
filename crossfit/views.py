@@ -111,10 +111,19 @@ class Leaderboard(ListView):
     context_object_name = 'workout_responses'
 
     def get_queryset(self):
-        return WorkoutResponse.objects.filter(workout__date=timezone.now().date()).exclude(time_taken=None, rounds_completed=None, weight_used=None).order_by(
+        selected_date = self.request.GET.get("date")
+
+        if selected_date is None:
+            selected_date = timezone.now().date()
+        return WorkoutResponse.objects.filter(workout__date=selected_date).exclude(time_taken=None,
+                                                                                   rounds_completed=None,
+                                                                                   weight_used=None).order_by(
             'time_taken', 'rounds_completed', 'weight_used')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['today'] = timezone.now()
+        selected_date = self.request.GET.get("date")
+        if selected_date is None:
+            selected_date = timezone.now().date()
+        context['selected_date'] = selected_date
         return context
