@@ -30,6 +30,9 @@ class Workout(models.Model):
 class WorkoutResponse(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
-    time_taken = models.TimeField(blank=True, null=True)
+    time_taken = models.DurationField(blank=True, null=True)
     rounds_completed = models.IntegerField(blank=True, null=True)
     weight_used = models.FloatField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user} - {self.workout} - {self.time_taken} - {self.rounds_completed} - {self.weight_used}"

@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
-</head>
-<body>
-    <h1>Leaderboard</h1>
+{% extends 'base.html' %}
+
+{% block title %} Leaderboard {% endblock %}
+
+{% block content %}
+    <h1>Leaderboard {{ today }}</h1>
+    
     <table>
         <thead>
             <tr>
@@ -18,16 +16,15 @@
             </tr>
         </thead>
         <tbody>
-            {% for entry in leaderboard_entries %}
-            <tr>
-                <td>{{ entry.workout_response.user.username }}</td>
-                <td>{{ entry.workout_response.workout.get_type_display }}</td>
-                <td>{{ entry.workout_response.time_taken }}</td>
-                <td>{{ entry.workout_response.rounds_completed }}</td>
-                <td>{{ entry.workout_response.weight_used }}</td>
-            </tr>
+            {% for entry in workout_responses %}
+                <tr>
+                    <td>{{ entry.user.username }}</td>
+                    <td>{{ entry.workout.get_type_display }}</td>
+                    <td>{{ entry.time_taken }} </td>
+                    <td>{{ entry.rounds_completed }} rounds</td>
+                    <td>{{ entry.weight_used }} kg</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
-</body>
-</html>
+{% endblock %}

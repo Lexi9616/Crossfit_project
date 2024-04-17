@@ -1,10 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy, reverse
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, TemplateView, FormView
 
-from crossfit.forms import UserForm, ProfileForm, WorkoutResponseForm
+from crossfit.forms import UserForm, ProfileForm
 from crossfit.models import Workout, Profile, WorkoutResponse
 from django import forms
 
@@ -105,10 +105,16 @@ class SubmitWorkoutResponseView(LoginRequiredMixin, FormView):
         return redirect('workout_detail', pk=workout_id)
 
 
-class Leaderboard(LoginRequiredMixin, TemplateView):
+class Leaderboard(ListView):
     model = WorkoutResponse
-    context_object_name = 'leaderboard'
-    template_name = 'profileupdate.html'
-    def leaderboard(request):
-        workout_responses = WorkoutResponse.objects.all()
-        return render(request, 'leaderboard.html', {'workout_responses': workout_responses})
+    template_name = 'leaderboard.html'
+    context_object_name = 'workout_responses'
+
+    def get_queryset(self):
+        return WorkoutResponse.objects.filter(workout__date=timezone.now().date()).exclude(time_taken=None, rounds_completed=None, weight_used=None).order_by(
+            'time_taken', 'rounds_completed', 'weight_used')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['today'] = timezone.now()
+        return context
