@@ -4,11 +4,13 @@
     <h1 style="text-align: center">WODs</h1>
     <ul>
         {% for workout in workouts %}
-            <li><a href="{% url 'workout_detail' workout.id %}" class="btn-sm btn-dark form-control" style="font-size: 20px; border-color: black;">
+            <li><a href="{% url 'workout_detail' workout.id %}" class="btn-sm btn-dark form-control"
+                   style="font-size: 20px; border-color: black;">
                 {{ workout.get_type_display }}
             </a> <span style="color: black">{{ workout.date }}</span></li>
         {% empty %}
             <li>No workouts available.</li>
         {% endfor %}
     </ul>
+
 {% endblock %}

@@ -127,3 +127,11 @@ class Leaderboard(ListView):
             selected_date = timezone.now().date()
         context['selected_date'] = selected_date
         return context
+
+
+class VideoTemplateView(LoginRequiredMixin, TemplateView):
+    template_name = 'video.html'
+
+
+class ChronometerTemplateView(LoginRequiredMixin, TemplateView):
+    template_name = 'chronometer.html'
