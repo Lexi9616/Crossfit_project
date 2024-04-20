@@ -1,11 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %}Workout detail {{ workout.get_type_display }}{% endblock %}
+{% block title %}Workout Detail - {{ workout.get_type_display }}{% endblock %}
 
 {% block content %}
-    <h1>Workout Detail</h1>
-    <p>{{ workout.get_type_display }}</p>
-    <p>{{ workout.description }}</p>
-    <p>{{ workout.date }}</p>
-    <a href="{% url 'submit_workout_response' workout_id=workout.id %}" class="btn btn-primary">Log your result</a>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center mb-0">Workout Detail</h2>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ workout.get_type_display }}</h3>
+                    <p class="card-text">{{ workout.description }}</p>
+                    <p class="card-text"><small class="text-muted">Date: {{ workout.date }}</small></p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'submit_workout_response' workout_id=workout.id %}" class="btn btn-primary">Log Your Result</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

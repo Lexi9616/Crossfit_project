@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 style="text-align: center">WODs</h1>
-    <ul>
-        {% for workout in workouts %}
-            <li><a href="{% url 'workout_detail' workout.id %}" class="btn-sm btn-dark form-control"
-                   style="font-size: 20px; border-color: black;">
-                {{ workout.get_type_display }}
-            </a> <span style="color: black">{{ workout.date }}</span></li>
-        {% empty %}
-            <li>No workouts available.</li>
-        {% endfor %}
-    </ul>
-
+    <div class="container">
+        <h1 class="text-center mb-4">WODs</h1>
+        <ul class="list-group">
+            {% for workout in workouts %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{% url 'workout_detail' workout.id %}" class="btn btn-dark btn-sm">
+                        {{ workout.get_type_display }}
+                    </a>
+                    <span class="text-muted">{{ workout.date }}</span>
+                </li>
+            {% empty %}
+                <li class="list-group-item">No workouts available.</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
