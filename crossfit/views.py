@@ -9,15 +9,15 @@ from crossfit.models import Workout, Profile, WorkoutResponse
 from django import forms
 
 
-class HomeTemplateView(LoginRequiredMixin, TemplateView):
+class HomeTemplateView(TemplateView):
     template_name = 'home.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        current_user_id = self.request.user.pk
-        profile = Profile.objects.get(id=current_user_id)
-        context['profile'] = profile
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     current_user_id = self.request.user.pk
+    #     profile = Profile.objects.get(id=current_user_id)
+    #     context['profile'] = profile
+    #     return context
 
 
 class WorkoutListView(ListView):
@@ -85,6 +85,13 @@ class EMOMWorkoutResponseForm(forms.ModelForm):
 class SubmitWorkoutResponseView(LoginRequiredMixin, FormView):
     template_name = 'workout_response_form.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        workout_id = self.kwargs['workout_id']
+        workout = Workout.objects.get(pk=workout_id)
+        context['workout_type'] = workout.type
+        return context
+
     def get_form_class(self):
         workout_id = self.kwargs['workout_id']
         workout = Workout.objects.get(pk=workout_id)
@@ -129,9 +136,9 @@ class Leaderboard(ListView):
         return context
 
 
-class VideoTemplateView(LoginRequiredMixin, TemplateView):
+class VideoTemplateView(TemplateView):
     template_name = 'video.html'
 
 
-class ChronometerTemplateView(LoginRequiredMixin, TemplateView):
+class ChronometerTemplateView(TemplateView):
     template_name = 'chronometer.html'
