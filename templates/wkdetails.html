@@ -12,11 +12,11 @@
                 </div>
                 <div class="card-body">
                     <h3 class="card-title">{{ workout.get_type_display }}</h3>
-                    <p class="card-text">{{ workout.description }}</p>
+                    <p class="card-text" style="white-space: pre-line;">{{ workout.description }}</p>
                     <p class="card-text"><small class="text-muted">Date: {{ workout.date }}</small></p>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="{% url 'submit_workout_response' workout_id=workout.id %}" class="btn btn-primary">Log Your Result</a>
+                    <a href="{% url 'submit_workout_response' workout_id=workout.id %}" class="btn btn-dark">Log Your Result</a>
                 </div>
             </div>
         </div>

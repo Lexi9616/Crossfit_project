@@ -6,21 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>
         {% block title %}
-            Django App
+            Crossfit app
         {% endblock %}
     </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <style>
         body {
-            background-image: url('{% static "backgroundd.jpg" %}');
-            background-size: cover;
-            background-position: center;
-            /* Optionally, you can add more CSS properties to style the background */
-        }
-        .content-wrapper {
-            background-color: rgba(255, 255, 255, 0.8); /* Example: semi-transparent white background for content */
-            padding: 20px; /* Adjust padding as needed */
+            background-image: url("{% static 'backgroundd.jpg' %}");
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            min-height: 95vh;
         }
     </style>
 </head>
@@ -35,3 +31,4 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
