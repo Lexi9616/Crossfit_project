@@ -27,7 +27,11 @@ SECRET_KEY = 'django-insecure-$^_q%2s8h+&+hfekqoja3cm-!7ff%!@_5ce3l#8+ug#0b2#u9m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'crossfit.pythonanywhere.com',
+    'localhost',
+    '127.0.0.1'
+]
 
 
 # Application definition
