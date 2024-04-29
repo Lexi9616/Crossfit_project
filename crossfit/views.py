@@ -125,7 +125,8 @@ class Leaderboard(ListView):
         return WorkoutResponse.objects.filter(workout__date=selected_date).exclude(time_taken=None,
                                                                                    rounds_completed=None,
                                                                                    weight_used=None).order_by(
-            'time_taken', 'rounds_completed', 'weight_used')
+            'time_taken', '-rounds_completed', '-weight_used')
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -136,9 +137,11 @@ class Leaderboard(ListView):
         return context
 
 
-class VideoTemplateView(TemplateView):
-    template_name = 'video.html'
+class SnatchTemplateView(TemplateView):
+    template_name = 'snatch.html'
 
+class CleanTemplateView(TemplateView):
+    template_name = 'clean.html'
 
 class ChronometerTemplateView(TemplateView):
     template_name = 'chronometer.html'

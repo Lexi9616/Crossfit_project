@@ -12,7 +12,8 @@ urlpatterns = [
     path('profile-edit/<int:pk>', views.ProfileUpdateView.as_view(), name='profile-update'),
     path('workout/<int:workout_id>/submit/', SubmitWorkoutResponseView.as_view(), name='submit_workout_response'),
     path('leaderboard/', views.Leaderboard.as_view(), name='leaderboard'),
-    path('video/', views.VideoTemplateView.as_view(), name='video'),
-    path('cronometer/', views.ChronometerTemplateView.as_view(), name='chronometer')
+    path('snatch/', views.SnatchTemplateView.as_view(), name='snatch'),
+    path('clean/', views.CleanTemplateView.as_view(), name='clean'),
+    path('cronometer/', views.ChronometerTemplateView.as_view(), name='chronometer'),
 
 ]
