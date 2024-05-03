@@ -3,12 +3,20 @@
 {% block title %}Profile update{% endblock %}
 
 {% block content %}
-    <div class="col-md-6 col-12">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="Submit" class="btn btn-success form-control">Submit</button>
-{#            <a href="{% url 'profile-details' profile.pk %}" class="btn btn-primary">Submit</a>#}
-        </form>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Profile Update</div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success form-control">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}

@@ -57,8 +57,13 @@
 {#                <tr>#}
 {#                    <th>User</th>#}
 {#                    <th>Workout Type</th>#}
-{#                    <th>Time Taken</th>#}
-{#                    <th>Rounds Completed</th>#}
+{#                    {% if workout_responses %}#}
+{#                        {% if workout_responses.0.workout.type == 'FOR_TIME' %}#}
+{#                            <th>Time Taken</th>#}
+{#                        {% elif workout_responses.0.workout.type == 'AMRAP' %}#}
+{#                            <th>Rounds Completed</th>#}
+{#                        {% endif %}#}
+{#                    {% endif %}#}
 {#                    <th>Weight Used</th>#}
 {#                </tr>#}
 {#                </thead>#}
@@ -67,8 +72,11 @@
 {#                    <tr>#}
 {#                        <td>{{ entry.user.username }}</td>#}
 {#                        <td>{{ entry.workout.get_type_display }}</td>#}
-{#                        <td>{{ entry.time_taken }}</td>#}
-{#                        <td>{{ entry.rounds_completed }} rounds</td>#}
+{#                        {% if entry.workout.type == 'FOR_TIME' %}#}
+{#                            <td>{{ entry.time_taken }}</td>#}
+{#                        {% elif entry.workout.type == 'AMRAP' %}#}
+{#                            <td>{{ entry.rounds_completed }} rounds</td>#}
+{#                        {% endif %}#}
 {#                        <td>{{ entry.weight_used }} kg</td>#}
 {#                    </tr>#}
 {#                {% endfor %}#}
@@ -83,85 +91,96 @@
 {% block title %}Leaderboard{% endblock %}
 
 {% block content %}
-    <style>
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-        }
+<style>
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+    }
 
-        h1 {
-            text-align: center;
-        }
+    h1 {
+        text-align: center;
+    }
 
-        .form-group {
-            margin-bottom: 1rem;
-        }
+    .form-group {
+        margin-bottom: 1rem;
+    }
 
-        .table-responsive {
-            overflow-x: auto;
-        }
+    .table-responsive {
+        overflow-x: auto;
+    }
 
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .table th,
-        .table td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6;
-        }
+    .table th,
+    .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+    }
 
-        .table th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-        }
+    .table th {
+        background-color: darkslategray;
+        color: #fff;
+        font-weight: bold;
+    }
 
-    </style>
-    <div class="container">
-        <h1 class="text-center">Leaderboard</h1>
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f8f9fa;
+    }
 
-        <form method="get" class="mb-3">
-            <div class="form-group">
-                <label for="date">Select Date:</label>
-                <input type="date" id="date" name="date" value="{{ selected_date }}" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">View Leaderboard</button>
-        </form>
+    .table-striped tbody tr:nth-of-type(even) {
+        background-color: #fff;
+    }
+</style>
+<div class="container">
+    <h1>Leaderboard</h1>
 
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
+    <form method="get" class="mb-3">
+        <div class="form-group">
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date" value="{{ selected_date }}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary" style="background: darkslategray">View Leaderboard</button>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
                 <tr>
                     <th>User</th>
                     <th>Workout Type</th>
                     {% if workout_responses %}
-                        {% if workout_responses.0.workout.type == 'FOR_TIME' %}
-                            <th>Time Taken</th>
-                        {% elif workout_responses.0.workout.type == 'AMRAP' %}
-                            <th>Rounds Completed</th>
-                        {% endif %}
+                    {% if workout_responses.0.workout.type == 'FOR_TIME' %}
+                    <th>Time Taken</th>
+                    {% elif workout_responses.0.workout.type == 'AMRAP' %}
+                    <th>Rounds Completed</th>
+                    {% endif %}
                     {% endif %}
                     <th>Weight Used</th>
                 </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
                 {% for entry in workout_responses %}
-                    <tr>
-                        <td>{{ entry.user.username }}</td>
-                        <td>{{ entry.workout.get_type_display }}</td>
-                        {% if entry.workout.type == 'FOR_TIME' %}
-                            <td>{{ entry.time_taken }}</td>
-                        {% elif entry.workout.type == 'AMRAP' %}
-                            <td>{{ entry.rounds_completed }} rounds</td>
-                        {% endif %}
-                        <td>{{ entry.weight_used }} kg</td>
-                    </tr>
+                <tr>
+                    <td>{{ entry.user.username }}</td>
+                    <td>{{ entry.workout.get_type_display }}</td>
+                    {% if entry.workout.type == 'FOR_TIME' %}
+                    <td>{{ entry.time_taken }}</td>
+                    {% elif entry.workout.type == 'AMRAP' %}
+                    <td>{{ entry.rounds_completed }} rounds</td>
+                    {% endif %}
+                    <td>{{ entry.weight_used }} kg</td>
+                </tr>
                 {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
+</div>
 {% endblock %}
