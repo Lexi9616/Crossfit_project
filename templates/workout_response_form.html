@@ -3,9 +3,9 @@
 {% block title %}Submit Workout{% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="card" style="padding: 0 14rem">
         <h1 class="text-center">Submit Workout</h1>
-        <form method="post">
+        <form class="text-center" method="post">
             {% csrf_token %}
             {% if workout_type == 'AMRAP' %}
                 <div class="form-group">
