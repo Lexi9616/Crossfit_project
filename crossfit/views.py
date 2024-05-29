@@ -12,14 +12,6 @@ from django import forms
 class HomeTemplateView(TemplateView):
     template_name = 'home.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     current_user_id = self.request.user.pk
-    #     profile = Profile.objects.get(id=current_user_id)
-    #     context['profile'] = profile
-    #     return context
-
-
 class WorkoutListView(ListView):
     model = Workout
     template_name = 'wklist.html'
